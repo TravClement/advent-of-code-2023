@@ -5,11 +5,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ScratchCard {
+    int cardNum;
     Set<Integer> winningNums;
     Set<Integer> nums;
 
     public ScratchCard(String line) {
-        String[] numbers = line.split(":")[1].split("\\|");
+        String[] metaTokens = line.split(":");
+        String[] numbers = metaTokens[1].split("\\|");
+        cardNum = Integer.parseInt(metaTokens[0].split("\\s+")[1]);
+
         String[] winningNumTokens = numbers[0].trim().split("\\s+");
         String[] numTokens = numbers[1].trim().split("\\s+");
 
@@ -22,5 +26,10 @@ public class ScratchCard {
         for (String num : numTokens) {
             nums.add(Integer.parseInt(num));
         }
+    }
+
+    public int calculateWins() {
+        nums.retainAll(winningNums);
+        return nums.size();
     }
 }
