@@ -9,17 +9,17 @@ import java.util.Scanner;
 
 public class Schematic {
     public static void main(String[] args) throws FileNotFoundException {
-        int res = sumParts("src/day3/input.txt");
+//        int res = sumParts("src/day3/input.txt");
+//        System.out.println("result: " + res);
+
+        GearRatio dut = new GearRatio();
+        int res = dut.findGearRatios("src/day3/input.txt");
         System.out.println("result: " + res);
     }
 
     public static int sumParts(String inputPath) throws FileNotFoundException {
         int total = 0;
-        List<String> lines = new ArrayList<>();
-        Scanner sc = new Scanner(new FileReader(inputPath));
-        while (sc.hasNextLine()) {
-            lines.add(sc.nextLine());
-        }
+        List<String> lines = getLines(inputPath);
 
         for (int row = 0; row < lines.size(); row++) {
             String line = lines.get(row);
@@ -44,10 +44,18 @@ public class Schematic {
             if (addNum) {
                 total += num;
             }
-            addNum = false;
         }
 
         return total;
+    }
+
+    public static List<String> getLines(String inputPath) throws FileNotFoundException {
+        List<String> lines = new ArrayList<>();
+        Scanner sc = new Scanner(new FileReader(inputPath));
+        while (sc.hasNextLine()) {
+            lines.add(sc.nextLine());
+        }
+        return lines;
     }
 
     // only called when the character at [row, col] is a digit
