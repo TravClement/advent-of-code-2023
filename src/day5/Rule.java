@@ -15,4 +15,10 @@ public class Rule {
         sourceStart = new BigInteger(st.nextToken());
         range = new BigInteger(st.nextToken());
     }
+
+    public Rule(BigInteger sourceStart, BigInteger destStart, BigInteger range) {
+        this.sourceStart = sourceStart;
+        this.destStart = destStart;
+        this.range = range;
+    }
 }
